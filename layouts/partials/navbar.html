@@ -7,11 +7,11 @@
   <div class="container">
     <div class="navbar-brand">
       {{- if $navbarLogo}}
-      <a class="navbar-item pt-1" href="{{ $navbarLogo.link }}">
+      <a class="navbar-item pt-0 pr-1" href="{{ $navbarLogo.link }}">
         <img src="{{ printf "/images/%s" $navbarLogo.image | relURL }}" alt="" width="{{ $navbarLogoWidth }}" height="{{ $navbarLogoHeight }}">
       </a>
       {{- end}}
-	  <h1 class="is-size-4 has-text-weight-bold mt-4">
+	  <h1 class="is-size-4 has-text-weight-bold title mb-0" style="margin-top: 1.2rem">
 		  {{ site.Title }}
 	  </h1>
 
