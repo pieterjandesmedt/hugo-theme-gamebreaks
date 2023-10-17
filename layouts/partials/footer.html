@@ -19,17 +19,29 @@
                 <h3>{{ .title }}</h3>
             </div>
             <ul class="link-list">
-              {{- range .links }}
-              <li>
-                <a href="{{ .link }}">
-                  {{ .text }}
-                </a>
-              </li>
-              {{- end }}
+			  {{ with .links }}
+              {{- range . }}
+				<li>
+				<a href="{{ .link }}">
+					{{ .text }}
+				</a>
+				</li>
+				{{- end }}
+			  {{ end }}
+			  {{ with .section }}
+				{{ range $index, $element := where $.Site.RegularPages "Section" . }}
+						<li>
+							<a href="{{ $element.Permalink }}">
+							{{ $element.Title }}
+							</a>
+						</li>
+				{{ end }}
+			  {{ end }}
             </ul>
           </div>
         </div>
       {{- end }}
+
       <div class="column">
         <div class="footer-column">
           <div class="footer-header">
