@@ -1,0 +1,40 @@
+{{ partial "navbar.html" . }}
+{{ partial "navbar-clone.html" . }}
+<section class="section is-medium" id="section2">
+  <div class="container">
+		<div class="title-wrapper has-text-centered mb-6">
+			<h2 class="title is-2">{{ .Title }}</h2>
+			<div class="divider is-centered"></div>
+		</div>
+
+	  	{{ range $index, $element := .Data.Pages}}
+		<div class="card is-flex">
+			<div class="columns">
+				<div class="column">
+					<figure class="image is-4by3">
+					<img src="/images/illustrations/{{ .Params.image }}" alt="{{ .Title }}">
+					</figure>
+				</div>
+				<div class="column">
+					<div class="card-content">
+						<div class="media">
+							<div class="media-content">
+								<p class="title is-4">{{ $element.Title }}</p>
+								<p class="subtitle is-6 has-text-grey-light is-italic">{{ $element.Params.tagline }}</p>
+							</div>
+						</div>
+
+						<div class="content">
+							{{ $element.Summary }}
+							<a class="button cta rounded primary-btn raised" href="{{ $element.Permalink }}">
+								{{ $.Site.Params.readMoreButton }} {{ $element.Title }}
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		{{ end }}
+  </div>
+</section>

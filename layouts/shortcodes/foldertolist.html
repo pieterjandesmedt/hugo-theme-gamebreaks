@@ -1,0 +1,8 @@
+
+{{ $section := .Get 0 }}
+<ul>
+{{ range (site.GetPage $section).RegularPages }}
+<li><a href="{{ .Permalink }}">{{ .Title }}</a> &mdash; {{ .Params.tagline }}</li>
+{{ end }}
+</ul>
+
