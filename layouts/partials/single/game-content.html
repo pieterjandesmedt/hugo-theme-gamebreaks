@@ -78,7 +78,7 @@
 <div class="modal" id="modal-js-example">
   <div class="modal-background"></div>
   <div class="modal-card">
-    <form name="contact" method="POST" data-netlify="true" action="{{ $action }}" netlify-honeypot="telephone">
+    <form name="game-offer" method="POST" data-netlify="true" action="{{ $action }}" netlify-honeypot="telephone">
     <header class="modal-card-head">
       <p class="modal-card-title">{{ .Title }}</p>
       <button class="delete" aria-label="close"></button>
@@ -87,7 +87,7 @@
             <div class="columns is-multiline">
               <div class="column is-6">
 				<label	class="label">{{ $participants }}</label>
-				<input class="input input-aantal" type="number" id="start" name="aantal"
+				<input class="input input-aantal" type="number" id="start" name="aantal-deelnemers"
 				placeholder="{{ .Params.participantsMin }} {{ $to }} {{ .Params.participantsMax }}" value="{{ .Params.participantsMax }}"
 				min="{{ .Params.participantsMin }}" max="{{ .Params.participantsMax }}"/>
 				<div class="help has-text-grey-light is-italic">
@@ -96,16 +96,16 @@
 				</div>
               <div class="column is-6">
 				<label	class="label">{{ $date }}</label>
-                <input class="input input-date" required name="date" type="date">
+                <input class="input input-date" required name="datum" type="date">
               </div>
               <div class="column is-6">
-                <input class="input" name="name" required type="text" {{with $name}}placeholder="{{.}}"{{end}}>
+                <input class="input" name="naam" required type="text" {{with $name}}placeholder="{{.}}"{{end}}>
               </div>
               <div class="column is-6">
                 <input class="input" name="email" required type="email" {{with $email}}placeholder="{{.}}"{{end}}>
               </div>
               <div class="column is-12">
-                <textarea class="textarea" name="message" rows="5" {{with $message}}placeholder="{{.}}"{{end}}></textarea>
+                <textarea class="textarea" name="bericht" rows="5" {{with $message}}placeholder="{{.}}"{{end}}></textarea>
               </div>
 				<div class="field is-hidden">
 					<label>

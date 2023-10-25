@@ -12,13 +12,13 @@
 <form name="contact" method="POST" data-netlify="true" action="{{ $action }}" netlify-honeypot="telephone">
 <div class="columns is-multiline">
 	<div class="column is-6">
-	<input class="input is-medium" name="name" type="text" {{with $name}}placeholder="{{.}}"{{end}}>
+	<input class="input is-medium" name="naam" type="text" {{with $name}}placeholder="{{.}}"{{end}}>
 	</div>
 	<div class="column is-6">
 	<input class="input is-medium" name="email" type="email" {{with $email}}placeholder="{{.}}"{{end}}>
 	</div>
 	<div class="column is-12">
-	<textarea class="textarea" name="message" rows="10" {{with $message}}placeholder="{{.}}"{{end}}></textarea>
+	<textarea class="textarea" name="bericht" rows="10" {{with $message}}placeholder="{{.}}"{{end}}></textarea>
 	</div>
 	<div class="field is-hidden">
 		<label>
