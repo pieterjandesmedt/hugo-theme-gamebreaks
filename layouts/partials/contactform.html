@@ -1,0 +1,32 @@
+{{- $section5   := .Site.Params.section5 }}
+{{- if eq $section5 true }}
+{{- $section5 = dict "_" "_" }}
+{{- end }}
+{{- $name       := index $section5 "name" | default "Enter your name"}}
+{{- $email      := index $section5 "email" | default "Enter your email address" }}
+{{- $message    := index $section5 "message" | default "Write something..."}}
+{{- $action     := index $section5 "action" | default "/success.html" }}
+{{- $action     := index $section5 "action" }}
+{{- $method     := index $section5 "method" }}
+{{- $buttonText := index $section5 "buttontext" | default "Send Message" }}
+<form name="contact" method="POST" data-netlify="true" action="{{ $action }}" netlify-honeypot="telephone">
+<div class="columns is-multiline">
+	<div class="column is-6">
+	<input class="input is-medium" name="name" type="text" {{with $name}}placeholder="{{.}}"{{end}}>
+	</div>
+	<div class="column is-6">
+	<input class="input is-medium" name="email" type="email" {{with $email}}placeholder="{{.}}"{{end}}>
+	</div>
+	<div class="column is-12">
+	<textarea class="textarea" name="message" rows="10" {{with $message}}placeholder="{{.}}"{{end}}></textarea>
+	</div>
+	<div class="field is-hidden">
+		<label>
+		Don’t fill this out if you’re human: <input name="telephone" />
+		</label>
+	</div>
+	<div class="form-footer has-text-centered mt-10">
+	<button class="button cta is-large primary-btn raised is-clear">{{ $buttonText }}</button>
+	</div>
+</div>
+</form>

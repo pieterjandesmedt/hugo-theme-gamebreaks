@@ -1,0 +1,52 @@
+<div class="columns mt-6">
+	<div class="column is-flex">
+		<div class="card p-6 is-relative is-flex-grow-1 is-shadowless" style="border: 3px solid #FFC100">
+			<span class="contact-icon icon">
+				<i class="mdi mdi-map-marker-outline"></i>
+			</span>
+			Antoon Van Dyckstraat 42<br/>
+			9050 Gentbrugge<br/>
+			België<br/>
+		</div>
+	</div>
+	<div class="column is-flex">
+		<div class="card p-6 is-relative is-flex-grow-1 is-shadowless" style="border: 3px solid #FFC100">
+			<span class="contact-icon icon">
+				<i class="mdi mdi-phone-outline"></i>
+			</span>
+			<span id="phone">██████████████████</>
+		</div>
+	</div>
+	<div class="column is-flex">
+		<div class="card p-6 is-relative is-flex-grow-1 is-shadowless" style="border: 3px solid #FFC100">
+			<span class="contact-icon icon">
+				<i class="mdi mdi-email-outline"></i>
+			</span>
+			<span id="email">██████████████████</span>
+		</div>
+	</div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+function decode($str) {
+return $str.replaceAll('x','')
+.replaceAll('atsymbol', '@', 'gi')
+.replaceAll('punt','.')
+.replaceAll('veertien','14')
+.replaceAll('zeven','7')
+.replaceAll('zever','6')
+.replaceAll('en','+')
+.replaceAll('0',' ')
+.replace('1','');
+}
+const email = 'xhxxxexxxlxlxxxoxxxaxxtxxxsxxxyxxxmxxbxxxoxxxlxxxgxxxaxxxmxxxexbxrxexaxkxsxpxuxnxtxbxe';
+const phone = 'en320veertien9zeven0zevenzever0veertien09zever'
+setTimeout(() => {
+const $el1 = document.getElementById('phone');
+console.log('$el1:', $el1);
+$el1.innerHTML = decode(phone);
+const $el2 = document.getElementById('email');
+$el2.innerHTML = decode(email);
+}, 500)
+})
+</script>

@@ -7,6 +7,10 @@
 			<div class="divider is-centered"></div>
 		</div>
 
+		<div class="content">
+			{{ .Content }}
+		</div>
+
 	  	{{ range $index, $element := .Data.Pages}}
 		<div class="card is-flex">
 			<div class="columns">

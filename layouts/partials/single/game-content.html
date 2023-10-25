@@ -1,3 +1,24 @@
+{{- $section5      := .Site.Params.section5 }}
+{{- $sectionGame   := .Site.Params.sectionGame }}
+{{- if eq $sectionGame true }}
+{{- $sectionGame = dict "_" "_" }}
+{{- end }}
+{{- if eq $section5 true }}
+{{- $section5 = dict "_" "_" }}
+{{- end }}
+{{- $name       := index $section5 "name" | default "Enter your name"}}
+{{- $email      := index $section5 "email" | default "Enter your email address" }}
+{{- $message    := index $sectionGame "message" | default "Write something..."}}
+{{- $action     := index $section5 "action" | default "/success.html" }}
+{{- $method     := index $section5 "method" }}
+{{- $price      := index $sectionGame "price" | default "Price" }}
+{{- $duration   := index $sectionGame "duration" | default "Duration" }}
+{{- $languages  := index $sectionGame "languages" | default "Languages" }}
+{{- $date       := index $sectionGame "date" | default "Date" }}
+{{- $participants := index $sectionGame "participants" | default "Number of participants" }}
+{{- $to         := index $sectionGame "to" | default "to" }}
+{{- $buttonText := index $sectionGame "buttontext" | default "Ask offer" }}
+{{- $cancelText := index $sectionGame "canceltext" | default "Cancel" }}
 <section class="section is-medium">
   <div class="container">
     <div class="columns">
@@ -20,17 +41,156 @@
 					</figure>
 				</div>
 				<div class="pl-5" style="border-left: 3px solid #4FC1EA">
-					<h5 class="label mt-4">Prijs</h5>
+					<h5 class="label mt-4">{{ $price }}</h5>
 					<span>{{ .Params.price }}</span>
-					<h5 class="label mt-4">Tijdsduur</h5>
+					<h5 class="label mt-4">{{ $duration }}</h5>
 					<span>{{ .Params.duration }}</span>
-					<h5 class="label mt-4">Aantal deelnemers</h5>
-					<span>{{ .Params.participants }}</span>
-					<h5 class="label mt-4">Talen</h5>
+					<h5 class="label mt-4">{{ $languages }}</h5>
 					<span>{{ .Params.languages }}</span>
+					<div class="field">
+					<h5 class="label mt-4">{{ $participants }}</h5>
+					<input class="input input-aantal" type="number" id="start" name="aantal"
+					placeholder="{{ .Params.participantsMin }} {{ $to }} {{ .Params.participantsMax }}" value="{{ .Params.participantsMax }}"
+					min="{{ .Params.participantsMin }}" max="{{ .Params.participantsMax }}"/>
+					<div class="help has-text-grey-light is-italic">
+						{{ .Params.participantsMin }} {{ $to }} {{ .Params.participantsMax }}
+					</div>
+					</div>
+
+						<h5 class="label mt-4">{{ $date }}</h5>
+						<input class="input input-date" type="date" id="start" name="datum" />
+						<div class="field is-hidden">
+							<label>
+							Don’t fill this out if you’re human: <input name="telephone" />
+							</label>
+						</div>
+						<div class="form-footer mt-3">
+							<button class="button cta is-large primary-btn raised is-clear js-modal-trigger"
+							 data-target="modal-js-example">{{ $buttonText }}</button>
+						</div>
+						</div>
 				</div>
 			</div>
 		</div>
     </div>
   </div>
 </section>
+<div class="modal" id="modal-js-example">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">{{ .Title }}</p>
+      <button class="delete" aria-label="close"></button>
+    </header>
+    <section class="modal-card-body">
+          <form name="contact" method="POST" data-netlify="true" action="./success.html" netlify-honeypot="telephone">
+            <div class="columns is-multiline">
+              <div class="column is-6">
+				<label	class="label">{{ $participants }}</label>
+				<input class="input input-aantal" type="number" id="start" name="aantal"
+				placeholder="{{ .Params.participantsMin }} {{ $to }} {{ .Params.participantsMax }}" value="{{ .Params.participantsMax }}"
+				min="{{ .Params.participantsMin }}" max="{{ .Params.participantsMax }}"/>
+				<div class="help has-text-grey-light is-italic">
+					{{ .Params.participantsMin }} {{ $to }} {{ .Params.participantsMax }}
+				</div>
+				</div>
+              <div class="column is-6">
+				<label	class="label">{{ $date }}</label>
+                <input class="input input-date" required name="date" type="date">
+              </div>
+              <div class="column is-6">
+                <input class="input" name="name" required type="text" {{with $name}}placeholder="{{.}}"{{end}}>
+              </div>
+              <div class="column is-6">
+                <input class="input" name="email" required type="email" {{with $email}}placeholder="{{.}}"{{end}}>
+              </div>
+              <div class="column is-12">
+                <textarea class="textarea" name="message" rows="5" {{with $message}}placeholder="{{.}}"{{end}}></textarea>
+              </div>
+				<div class="field is-hidden">
+					<label>
+					Don’t fill this out if you’re human: <input name="telephone" />
+					</label>
+				</div>
+            </div>
+          </form>
+
+    </section>
+    <footer class="modal-card-foot is-justify-content-end">
+		<div class="buttons is-right">
+      <button class="cancel button">{{ $cancelText }}</button>
+      <input type="submit" class="button primary-btn raised mr-0" value="{{ $buttonText }}"/>
+	  </div>
+    </footer>
+  </div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // Functions to open and close a modal
+  function openModal($el) {
+    $el.classList.add('is-active');
+  }
+
+  function closeModal($el) {
+    $el.classList.remove('is-active');
+  }
+
+  function closeAllModals() {
+    (document.querySelectorAll('.modal') || []).forEach(($modal) => {
+      closeModal($modal);
+    });
+  }
+
+  // Add a click event on buttons to open a specific modal
+  (document.querySelectorAll('.js-modal-trigger') || []).forEach(($trigger) => {
+    const modal = $trigger.dataset.target;
+    const $target = document.getElementById(modal);
+
+    $trigger.addEventListener('click', () => {
+      openModal($target);
+    });
+  });
+
+  // Add a click event on various child elements to close the parent modal
+  (document.querySelectorAll('.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button.cancel') || []).forEach(($close) => {
+    const $target = $close.closest('.modal');
+
+    $close.addEventListener('click', () => {
+      closeModal($target);
+    });
+  });
+
+  // Add a keyboard event to close all modals
+  document.addEventListener('keydown', (event) => {
+    if (event.code === 'Escape') {
+      closeAllModals();
+    }
+  });
+
+  // Form functions
+  // Add a change event on inputs to change the corresponding input in the modal
+  const inputsDate = document.querySelectorAll('.input-date') || []
+  inputsDate.forEach(($trigger) => {
+	$trigger.min = (new Date()).toISOString().substring(0,10);
+	$trigger.addEventListener('change', (change) => {
+		//console.log('value:', change.target.value);
+		inputsDate.forEach(($target) => {
+			console.log('$target:', $target)
+			$target.value = change.target.value;
+		});
+    });
+  });
+
+  const inputsAantal = document.querySelectorAll('.input-aantal') || []
+  inputsAantal.forEach(($trigger) => {
+		$trigger.addEventListener('change', (change) => {
+		//console.log('value:', change.target.value)
+		inputsAantal.forEach(($target) => {
+			console.log('$target:', $target)
+			$target.value = change.target.value;
+		});
+    });
+  });
+
+});
+</script>
