@@ -1,0 +1,44 @@
+{{ $page := . }}
+{{ with .Params.images }}
+<section class="section is-medium pt-0">
+	<div class="container">
+		<div class="grid">
+			<div class="grid-sizer"></div>
+
+			{{ range . }}
+			<div class="grid-item">
+				{{ $img := resources.GetRemote (printf "https://gamebreaks.s3.eu-west-3.amazonaws.com/%s" (string .) | relURL) }}
+				{{ $img := $img.Resize "600x" }}
+				<img src="{{ $img.RelPermalink }}"/>
+			</div>
+			{{ end }}
+
+		</div>
+	</div>
+</section>
+{{ end }}
+<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+	var msnry = new Masonry( '.grid', {
+		columnWidth: '.grid-sizer',
+		itemSelector: '.grid-item',
+		percentPosition: true,
+		gutter: 10
+	});
+	msnry.layout();
+});
+</script>
+<style>
+/* fluid 3 columns */
+.grid-sizer,
+.grid-item {
+	width: calc(33.32% - 10px);
+	margin-bottom: 10px;
+}
+/* 2 columns wide */
+.grid-item--width2 { width: 66.65%; }
+.grid img {
+	display: block;
+}
+</style>
