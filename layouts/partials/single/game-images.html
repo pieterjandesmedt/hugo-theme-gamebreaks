@@ -7,7 +7,7 @@
 
 			{{ range . }}
 			<div class="grid-item">
-				{{ $img := resources.GetRemote (printf "https://gamebreaks.s3.eu-west-3.amazonaws.com/%s" (string .) | relURL) }}
+				{{ $img := resources.GetRemote (printf "https://gamebreaks.s3.eu-west-3.amazonaws.com/%s" (string .)) }}
 				{{ $img := $img.Resize "600x" }}
 				<img src="{{ $img.RelPermalink }}"/>
 			</div>
