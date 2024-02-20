@@ -12,10 +12,10 @@
       {{- end }}
     </div>
 
-    <div class="content-wrapper">
+    <div class="content-wrapper" style="overflow: scroll;">
       <div class="columns">
         {{- range $clients }}
-        <div class="column">
+        <div class="column is-3-desktop is-6-tablet">
           <figure class="testimonial">
             <blockquote>
               {{ .quote }}
