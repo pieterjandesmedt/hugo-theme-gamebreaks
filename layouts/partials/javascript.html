@@ -4,3 +4,16 @@
 <script src="{{ "js/jquery.panelslider.min.js" | relURL }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
 <script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
+<script src="{{ "js/photoswipe/umd/photoswipe.umd.min.js" | relURL }}"></script>
+<script src="{{ "js/photoswipe/umd/photoswipe-lightbox.umd.min.js" | relURL }}"></script>
+<script type="text/javascript">
+	var lightbox = new PhotoSwipeLightbox({
+	gallery: '#gallery',
+	children: 'a',
+	// dynamic import is not supported in UMD version
+	pswpModule: PhotoSwipe,
+	imageClickAction: 'next',
+  	tapAction: 'next',
+	});
+	lightbox.init();
+</script>

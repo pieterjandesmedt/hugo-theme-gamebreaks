@@ -2,12 +2,19 @@
 {{ with .Params.images }}
 <section class="section is-medium pt-0">
 	<div class="container">
-		<div class="columns is-multiline">
+		<div class="columns is-multiline" id="gallery">
 			{{ range . }}
 			<div class="column is-one-third-desktop is-half-tablet">
-				{{ $img := resources.GetRemote (printf "https://gamebreaks.s3.eu-west-3.amazonaws.com/%s" (string .)) }}
-				{{ $img := $img.Resize "600x" }}
-				<img src="{{ $img.RelPermalink }}"/>
+				{{ $imgSrc := printf "https://gamebreaks.s3.eu-west-3.amazonaws.com/%s" (string .) }}
+				{{ $img := resources.GetRemote ($imgSrc) }}
+				{{ $imgResized := $img.Resize "600x" }}
+				{{ $imgResized2 := $img.Resize "2560x" }}
+				<a href="{{ $imgResized2.RelPermalink }}"
+    				data-pswp-width="{{ $imgResized2.Width }}"
+    				data-pswp-height="{{ $imgResized2.Height }}"
+    				target="_blank">
+					<img src="{{ $imgResized.RelPermalink }}"/>
+				</a>
 			</div>
 			{{ end }}
 
